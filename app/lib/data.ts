@@ -7,7 +7,7 @@ export async function fetchRevenue() {
   // Add noStore() here prevent the response from being cached. This is equivalent to in fetch(..., {cache: 'no-store'}).
   try {
     await new Promise((resolve) => setTimeout(resolve, 3000)); // para ver el esqueleto del loading
-    
+
     const data = await sql<Revenue>`SELECT * FROM revenue`;
 
     console.log('Data fetch complete after 3 seconds.');
@@ -130,8 +130,11 @@ export async function fetchInvoicesPages(query: string) {
 }
 
 export async function fetchInvoiceById(id: string) {
+
+  noStore();
+
   try {
-    const data = await sql<InvoiceForm>`
+    const data = await sql`
       SELECT
         invoices.id,
         invoices.customer_id,
@@ -142,14 +145,18 @@ export async function fetchInvoiceById(id: string) {
     `;
 
     const invoice = data.rows.map((invoice) => ({
-      ...invoice,
+      // ...invoice,
+      id: invoice.id,
+      customer_id: invoice.customer_id,
+      status: invoice.status,
       // Convert amount from cents to dollars
       amount: invoice.amount / 100,
     }));
 
     return invoice[0];
+
   } catch (error) {
-    console.error('Database Error:', error);
+    throw new Error('Failed to fetch invoice by ID.');
   }
 }
 
