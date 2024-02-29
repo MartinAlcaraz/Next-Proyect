@@ -13,14 +13,16 @@ export default function Search({ placeholder }: { placeholder: string }) {
   // si vuelve a recibir un nuevo evento antes de que el tiempo expire, se reinicia el contador.
   // se ejecuta la funcion
   const handleSearch = useDebouncedCallback((term: string) => {
-    const params = new URLSearchParams(searchParams);
+
+    const params = new URLSearchParams(searchParams); // se crea una nueva instancia de searchparams con los parametros existentes en la URL
     params.set('page', '1');
     
     if (term) {
       params.set('query', term);
     } else {
       params.delete('query');
-    }
+    }    
+
     replace(`${pathname}?${params.toString()}`);
     
   },300);

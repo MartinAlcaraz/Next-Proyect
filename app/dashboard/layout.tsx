@@ -1,5 +1,20 @@
 import SideNav from '@/app/ui/dashboard/sidenav';
+import { Metadata } from 'next';
 
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot:{
+      index: false,
+      follow: false,
+      nocache: true,
+      notranslate: true,
+    }
+  },
+}
+// Dahsboard layout
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">

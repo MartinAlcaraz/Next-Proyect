@@ -2,6 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import AcmeLogo from '@/app/ui/acme-logo';
 import { lusitana } from './ui/fonts';
+import { Metadata } from 'next';
+ 
+export const metadata: Metadata = {
+  title: 'Acme',
+};
 
 export default function Page() {
   return (

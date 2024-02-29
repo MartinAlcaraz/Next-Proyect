@@ -6,6 +6,11 @@ import { lusitana } from '@/app/ui/fonts';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 import { fetchInvoicesPages } from '@/app/lib/data';
+import { Metadata } from 'next';
+ 
+export const metadata: Metadata = {
+  title: 'Invoices',
+};
 
 // searchParams is like useSearchParams for server Side Component. No need import because is a parameter.
 export default async function Page({ searchParams }: { searchParams?: { query?: string ; page?: string }}) {
